@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/item_board"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#03000000"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:padding="1dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/item_board"
+                android:scaleType="fitCenter"
+                android:src="@drawable/receive_sms" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:background="@drawable/item_board"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/txtSetReceNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/item_board"
+                    android:gravity="left|center"
+                    android:inputType="numberDecimal|textNoSuggestions"
+                    android:text="1588-4567"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/txtSetReceName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/item_board"
+                    android:gravity="left|center"
+                    android:inputType="textPersonName|textNoSuggestions"
+                    android:text="삼성카드"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+
+            android:layout_gravity="center_vertical|center_horizontal"
+            app:srcCompat="@drawable/exchange" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:padding="1dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/item_board"
+                android:scaleType="fitCenter"
+                android:src="@drawable/send_sms" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:background="@drawable/item_board"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/txtSetTransNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/item_board"
+                    android:gravity="left|center"
+                    android:inputType="numberDecimal|textNoSuggestions"
+                    android:text="010-4697-3907"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/txtSetTransName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/item_board"
+                    android:gravity="left|center"
+                    android:inputType="textPersonName|textNoSuggestions"
+                    android:text="최지선"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/item_board"
+        >
+
+        <Button
+            android:id="@+id/btinsert"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="추가"
+            android:elevation="1dp"
+            android:layout_margin="2dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            />
+        <Button
+            android:id="@+id/btchange"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:elevation="1dp"
+            android:layout_margin="2dp"
+            android:textSize="13sp"
+            android:text="변경"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            />
+        <Button
+            android:id="@+id/btdelete"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:elevation="1dp"
+            android:layout_margin="2dp"
+            android:textSize="13sp"
+            android:text="삭제"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            />
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
