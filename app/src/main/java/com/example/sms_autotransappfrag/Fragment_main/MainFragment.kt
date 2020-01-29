@@ -57,8 +57,8 @@ class MainFragment : Fragment() {
                 Log.d(TAG , "${position}번 리스트 선택")
                 when(position){
                     0 -> (activity as MainActivity).changeFragment(REGIST_FRAG)
-                    1 -> (activity as MainActivity).changeFragment(SEND_FRAG)
-                    2 -> (activity as MainActivity).changeFragment(LOG_FRAG)
+                    1 -> (activity as MainActivity).changeFragment(LOG_FRAG)
+                    2 -> (activity as MainActivity).changeFragment(SEND_FRAG)
                     3 -> Toast.makeText(context,"버전 : 2020.01.29",Toast.LENGTH_LONG).show()
 
 
