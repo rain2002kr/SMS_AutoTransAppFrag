@@ -59,7 +59,7 @@ class MainFragment : Fragment() {
                     0 -> (activity as MainActivity).changeFragment(REGIST_FRAG)
                     1 -> (activity as MainActivity).changeFragment(LOG_FRAG)
                     2 -> (activity as MainActivity).changeFragment(SEND_FRAG)
-                    3 -> Toast.makeText(context,"버전 : 2020.01.29",Toast.LENGTH_LONG).show()
+                    3 -> Toast.makeText(context,"버전 : 2020.01.29 ver01",Toast.LENGTH_LONG).show()
 
 
                 }

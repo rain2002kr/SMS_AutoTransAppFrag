@@ -1,6 +1,7 @@
 package com.example.sms_autotransappfrag.Contact_Regist_item
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -28,17 +29,66 @@ import com.example.sms_autotransappfrag.MainViewModel
 import com.example.sms_autotransappfrag.R
 import kotlinx.android.synthetic.main.fragment_contact_regist.*
 import kotlinx.android.synthetic.main.sub_contact_register_view.*
+import java.lang.Exception
 
 
 class ContactRegistFragment : Fragment() {
     val TAG = "ContactRegistFragment"
     private lateinit var contactViewModel : ContactViewModel
     private var id: Long? = null
+    val initial = '와'.toUpperCase()
+    var check :Boolean = false
+
+
+
+
+    private val list by lazy {
+        mutableListOf<Contact>(
+            Contact(
+                id,
+                R.drawable.receive_sms!!,
+                "1588-0800",
+                "국민카드",
+                R.drawable.exchange!!,
+                R.drawable.send_sms!!,
+                "010-5687-4135",
+                "와이프",
+                initial
+            ),
+            Contact(
+                id,
+                R.drawable.receive_sms!!,
+                "1588-8900",
+                "삼성카드",
+                R.drawable.exchange!!,
+                R.drawable.send_sms!!,
+                "010-5687-4135",
+                "와이프",
+                initial
+            )
+        )
+    }
+
+
+
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        try {
+            check = savedInstanceState!!.getBoolean("check")
+        }catch (e :Exception){e.printStackTrace()}
+
+        super.onCreate(savedInstanceState)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_contact_regist, container, false)
         inflater.inflate(R.layout.sub_contact_register_view,contact_register,true)
+
+
+
         return view
     }
 
@@ -47,8 +97,6 @@ class ContactRegistFragment : Fragment() {
         home.setOnClickListener({
             (activity as MainActivity).changeFragment(MAIN_FRAG)
         })
-
-
 
         val inflater = LayoutInflater.from(context)
         inflater.inflate(R.layout.sub_contact_register_view,contact_register,true)
@@ -104,7 +152,31 @@ class ContactRegistFragment : Fragment() {
 
 
 
+
+        if(check == false) {
+            list.forEach {
+                contactViewModel.insert(it)
+            }
+            check = true
+        }
+        //val contact1 : Contact = Contact(id,R.drawable.receive_sms!!,"1588-0800","국민카드",R.drawable.exchange!!,R.drawable.send_sms!!,"010-5687-4135","와이프",initial)
+        //val contact2 : Contact = Contact(id,R.drawable.receive_sms!!,"1588-8900","삼성카드",R.drawable.exchange!!,R.drawable.send_sms!!,"010-5687-4135","와이프",initial )
+        //contactViewModel.insert(contact1)
+        //contactViewModel.insert(contact2)
+
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+
+        outState?.run{
+            putBoolean("check",check)
+        }
+
+
+        super.onSaveInstanceState(outState)
+
+    }
+
     private fun deleteDialog(contact: Contact) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setMessage("Delete selected contact?")
@@ -114,6 +186,7 @@ class ContactRegistFragment : Fragment() {
             }
         builder.show()
     }
+
 
 
 }

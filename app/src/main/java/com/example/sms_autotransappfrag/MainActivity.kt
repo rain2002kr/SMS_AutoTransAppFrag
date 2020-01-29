@@ -1,14 +1,21 @@
 package com.example.sms_autotransappfrag
 
 import android.Manifest
+import android.app.Activity
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.telephony.SmsManager
 import android.util.Log
+import android.util.TimeUtils
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -28,6 +35,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_sent_log_sm.*
 import kotlinx.android.synthetic.main.sub_contact_log_view.*
 import java.lang.Exception
+import java.sql.Timestamp
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,6 +43,7 @@ class MainActivity : AppCompatActivity() {
     private val MY_PERMISSIONS_REQUEST_RECEIVE_SMS :Int  = 1
     private val MY_PERMISSIONS_REQUEST_SEND_SMS :Int  = 2
     private val multiplePermissionsCode = 100
+
     private val requiredPermissions = arrayOf(
         Manifest.permission.SEND_SMS,
         Manifest.permission.RECEIVE_SMS
@@ -50,10 +59,8 @@ class MainActivity : AppCompatActivity() {
         try {
             contactLog(intent, "onNewIntent" )
             changeFragment(LOG_FRAG)
-        }catch (e: Exception ){
-            e.printStackTrace()
-        }
-        //Log.d(TAG,"onNewIntent")
+        }catch (e: Exception ){e.printStackTrace()}
+
         super.onNewIntent(intent)
     }
 
@@ -66,8 +73,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment,MainFragment()).commit()
 
-        //val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        //inflater.inflate(R.layout.sub_contact_log_view,main_log_view,true)
 
         // Set contactItemClick & contactItemLongClick lambda
         val adapter = ContactLogAdapter({ contactLog ->
@@ -186,6 +191,71 @@ class MainActivity : AppCompatActivity() {
         builder.show()
     }
 
+
+    //send SMS Function
+    fun sendSMS(smsNumber:String, smsText:String) {
+
+        val intentSent : Intent = Intent("SMS_SENT_ACTION")
+        val intentDelivered : Intent = Intent("SMS_DELIVERED_ACTION")
+        val sentIntent = PendingIntent.getBroadcast(this,0,intentSent,0)
+        val deliveredIntent = PendingIntent.getBroadcast(this,0,intentDelivered,0)
+
+        registerReceiver(object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                when (resultCode) {
+                    Activity.RESULT_OK ->  // 전송 성공
+                    {
+                        Toast.makeText(context, "전송 완료", Toast.LENGTH_SHORT).show()
+                        println("전송 완료")
+                    }
+                    SmsManager.RESULT_ERROR_GENERIC_FAILURE ->  // 전송 실패
+                    {
+                        Toast.makeText(context, "전송 실패", Toast.LENGTH_SHORT).show()
+                        println("전송 실패")
+                    }
+                    SmsManager.RESULT_ERROR_NO_SERVICE ->  // 서비스 지역 아님
+                    {
+                        Toast.makeText(context, "서비스 지역이 아닙니다", Toast.LENGTH_SHORT).show()
+                        println("서비스 지역이 아닙니다")
+                    }
+                    SmsManager.RESULT_ERROR_RADIO_OFF ->  // 무선 꺼짐
+                    {
+                        Toast.makeText(context, "휴대폰이 꺼져있습니다", Toast.LENGTH_SHORT).show()
+                        println("휴대폰이 꺼져있습니다")
+                    }
+                    SmsManager.RESULT_ERROR_NULL_PDU ->  // PDU 실패
+                    {
+                        Toast.makeText(context, "PDU Null", Toast.LENGTH_SHORT).show()
+                        println("PDU Null")
+                    }
+                }
+            }
+        }, IntentFilter("SMS_SENT_ACTION"))
+
+        // SMS가 도착했을때 실행
+        registerReceiver(object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                when (resultCode) {
+                    Activity.RESULT_OK ->  // 도착 완료
+                    {
+                        Toast.makeText(context, "SMS 도착 완료", Toast.LENGTH_SHORT).show()
+                        println("SMS 도착 완료")
+                    }
+                    Activity.RESULT_CANCELED ->  // 도착 안됨
+                    {
+                        Toast.makeText(context, "SMS 도착 실패", Toast.LENGTH_SHORT).show()
+                        println("SMS 도착 실패")
+                    }
+                }
+            }
+        }, IntentFilter("SMS_DELIVERED_ACTION"))
+
+        val SmsManager = SmsManager.getDefault()
+        SmsManager.sendTextMessage(smsNumber, null, smsText, sentIntent, deliveredIntent)
+
+
+    }
+
     // get SmS function
     private fun contactLog(getintent : Intent, intentType :String) {
 
@@ -227,6 +297,7 @@ class MainActivity : AppCompatActivity() {
                     transNumber
                 )
 
+                sendSMS(transNumber,message)
 
                 contactLogViewModel.insert(contactlog)
 

@@ -48,7 +48,7 @@
                     android:background="@drawable/item_board"
                     android:gravity="left|center"
                     android:inputType="numberDecimal|textNoSuggestions"
-                    android:text="1588-4567"
+                    android:text="1588-8900"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="13sp" />
 
@@ -110,7 +110,7 @@
                     android:background="@drawable/item_board"
                     android:gravity="left|center"
                     android:inputType="numberDecimal|textNoSuggestions"
-                    android:text="010-4697-3907"
+                    android:text="010-5687-4135"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="13sp" />
 
