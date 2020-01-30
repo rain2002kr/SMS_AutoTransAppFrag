@@ -39,10 +39,6 @@ class ContactAdapter(val contactItemClick: (Contact) -> Unit, val contactItemLon
         private val txtTransNumber = itemView.findViewById<TextView>(R.id.txtTransNumber)
         private val txtTransName = itemView.findViewById<TextView>(R.id.txtTransName)
 
-        //private val nameTv = itemView.findViewById<TextView>(R.id.edName)
-        //private val numberTv = itemView.findViewById<TextView>(R.id.edPhone)
-        //private val initialTv = itemView.findViewById<TextView>(R.id.initial)
-
         fun bind(contact: Contact) {
             imgReceiver.setImageResource(contact.imgReceiver!!)
             imgRotate.setImageResource(contact.imgRotate!!)
@@ -52,10 +48,6 @@ class ContactAdapter(val contactItemClick: (Contact) -> Unit, val contactItemLon
             txtReceName.text = contact.receiveName
             txtTransNumber.text = contact.transNumber
             txtTransName.text = contact.transName
-
-            //nameTv.text = contact.name
-            //numberTv.text = contact.number
-            //initialTv.text = contact.initial.toString()
 
             itemView.setOnClickListener {
                 contactItemClick(contact)

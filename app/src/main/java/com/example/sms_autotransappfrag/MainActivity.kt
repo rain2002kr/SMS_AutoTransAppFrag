@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
     private val MY_PERMISSIONS_REQUEST_RECEIVE_SMS :Int  = 1
     private val MY_PERMISSIONS_REQUEST_SEND_SMS :Int  = 2
     private val multiplePermissionsCode = 100
-
     private val requiredPermissions = arrayOf(
         Manifest.permission.SEND_SMS,
         Manifest.permission.RECEIVE_SMS
@@ -53,6 +52,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var contactViewModel : ContactViewModel
     private lateinit var contactLogViewModel : ContactLogViewModel
     private var id: Long? = null
+
 
     //onNewIntent
     override fun onNewIntent(intent: Intent) {

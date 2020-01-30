@@ -37,10 +37,6 @@ class ContactRegistFragment : Fragment() {
     private lateinit var contactViewModel : ContactViewModel
     private var id: Long? = null
     val initial = '와'.toUpperCase()
-    var check :Boolean = false
-
-
-
 
     private val list by lazy {
         mutableListOf<Contact>(
@@ -65,29 +61,26 @@ class ContactRegistFragment : Fragment() {
                 "010-5687-4135",
                 "와이프",
                 initial
-            )
+            ),
+            Contact(
+                id,
+                R.drawable.receive_sms!!,
+            "650-555-1212",
+            "VM Emual",
+                R.drawable.exchange!!,
+                R.drawable.send_sms!!,
+                "010-5687-4135",
+                "와이프",
+                initial
+        )
         )
     }
 
-
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        try {
-            check = savedInstanceState!!.getBoolean("check")
-        }catch (e :Exception){e.printStackTrace()}
-
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_contact_regist, container, false)
         inflater.inflate(R.layout.sub_contact_register_view,contact_register,true)
-
-
 
         return view
     }
@@ -151,29 +144,19 @@ class ContactRegistFragment : Fragment() {
         })
 
 
-
-
-        if(check == false) {
-            list.forEach {
+        val pref = requireActivity().getPreferences(0)
+        val editor = pref.edit()
+        val init = pref.getBoolean("init",false)
+        if (init == false) {
+            list.forEach({
                 contactViewModel.insert(it)
-            }
-            check = true
+            })
+            editor.putBoolean("init", true).apply()
         }
-        //val contact1 : Contact = Contact(id,R.drawable.receive_sms!!,"1588-0800","국민카드",R.drawable.exchange!!,R.drawable.send_sms!!,"010-5687-4135","와이프",initial)
-        //val contact2 : Contact = Contact(id,R.drawable.receive_sms!!,"1588-8900","삼성카드",R.drawable.exchange!!,R.drawable.send_sms!!,"010-5687-4135","와이프",initial )
-        //contactViewModel.insert(contact1)
-        //contactViewModel.insert(contact2)
-
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-
-        outState?.run{
-            putBoolean("check",check)
-        }
-
-
-        super.onSaveInstanceState(outState)
+        btchange.setOnClickListener({
+            editor.putBoolean("init", false).apply()
+            Toast.makeText(context,"초기화되었습니다.",Toast.LENGTH_LONG).show()
+        })
 
     }
 
