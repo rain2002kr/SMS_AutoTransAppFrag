@@ -15,9 +15,7 @@ import com.example.sms_autotransappfrag.App
 import com.example.sms_autotransappfrag.MainActivity
 
 import com.example.sms_autotransappfrag.R
-import com.example.sms_autotransappfrag.tContact
-import kotlinx.android.synthetic.main.fragment_contact_regist.*
-import kotlinx.android.synthetic.main.fragment_send_sm.*
+import kotlinx.android.synthetic.main.fragment_send_sms.*
 
 /**
  * A simple [Fragment] subclass.
@@ -29,7 +27,7 @@ class SendSmSFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_send_sm, container, false)
+        val view = inflater.inflate(R.layout.fragment_send_sms, container, false)
         return view
     }
 
@@ -41,8 +39,6 @@ class SendSmSFragment : Fragment() {
 
         })
 
-
-
         checkbt.setOnClickListener({
             val contacts  = contactViewModel.getAll().value
             Log.d(TAG,"start ")
@@ -53,14 +49,18 @@ class SendSmSFragment : Fragment() {
             val sender = App.prefs.getV("sender")
             val contents = App.prefs.getV("contents")
             val receivedDate = App.prefs.getV("receivedDate")
-            println("${sender} ${contents} ${receivedDate}")
+            println("${sender}\n${contents}\n ${receivedDate}\n")
 
         })
 
-        saveBtApp.setOnClickListener({
 
-        })
-        loadBtApp.setOnClickListener({
+        btSend.setOnClickListener({
+            val sender = App.prefs.getV("sender")
+            val contents = App.prefs.getV("contents")
+            val receivedDate = App.prefs.getV("receivedDate")
+            val number  = txtSetReceNumber.text.toString()
+            val message =
+            (activity as MainActivity).sendSMS(number , contents.toString())
 
         })
 

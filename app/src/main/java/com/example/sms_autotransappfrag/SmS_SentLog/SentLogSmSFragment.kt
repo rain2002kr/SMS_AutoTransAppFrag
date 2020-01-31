@@ -18,7 +18,7 @@ import com.example.roomexample_yena.*
 import com.example.sms_autotransappfrag.MainActivity
 
 import com.example.sms_autotransappfrag.R
-import kotlinx.android.synthetic.main.fragment_send_sm.*
+import kotlinx.android.synthetic.main.fragment_send_sms.*
 import kotlinx.android.synthetic.main.fragment_sent_log_sm.*
 import kotlinx.android.synthetic.main.sub_contact_register_view.*
 
