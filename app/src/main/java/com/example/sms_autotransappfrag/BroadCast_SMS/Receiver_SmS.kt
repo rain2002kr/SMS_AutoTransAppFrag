@@ -1,5 +1,6 @@
 package com.example.sms_autotransappfrag.BroadCast_SMS
 
+import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -9,11 +10,16 @@ import android.telephony.SmsMessage
 import android.util.Log
 import android.widget.Toast
 import com.example.sms_autotransappfrag.MainActivity
+import android.content.SharedPreferences;
+import android.provider.Settings
+import com.example.sms_autotransappfrag.App
+
+
 import java.util.*
 
 class Receiver_SmS : BroadcastReceiver() {
     private val SimpleDateFormat= "yyyy-MM-dd HH:mm"
-   // private lateinit var contactViewModel : ContactViewModel
+
     private val TAG = "Receiver_SmS"
 
     override fun onReceive(context: Context, intent: Intent) {
@@ -30,6 +36,11 @@ class Receiver_SmS : BroadcastReceiver() {
             Log.d(this.javaClass.name, "received date: $receivedDate")
             Toast.makeText(context,"broad send Sms $sender : $contents",Toast.LENGTH_LONG).show()
             sendToActivity(context,sender.toString(),contents.toString(),receivedDate.toString())
+            //temp save the data of sender,contents and time.
+            App.prefs.setV("sender",sender)
+            App.prefs.setV("contents",contents)
+            App.prefs.setV("receivedDate",receivedDate.toString())
+
         }
     }
 

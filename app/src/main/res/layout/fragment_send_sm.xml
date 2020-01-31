@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SmS_Send.SendSmSFragment">
 
     <Button
         android:id="@+id/home2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="home_sendSms"
         />
+    <Button
+        android:id="@+id/checkbt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CHECK"
+        />
 
-</FrameLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/txtlogSMS"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="size"
+            />
+
+
+    </ScrollView>
+
+</LinearLayout>
