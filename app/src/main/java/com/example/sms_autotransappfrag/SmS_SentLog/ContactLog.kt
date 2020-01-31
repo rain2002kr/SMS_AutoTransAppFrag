@@ -31,7 +31,6 @@ class ContactLog (
     var transNumber: String
 
 ){
-    //constructor() : this(null, "","",'\u0000')
     constructor() : this(null, "","","","",
                                     "","",""
     )

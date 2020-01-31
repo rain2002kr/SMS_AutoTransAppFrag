@@ -3,12 +3,16 @@ package com.example.sms_autotransappfrag
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.roomexample_yena.Contact
+
+class tContact(val name:String,val sms:String,val time:String)
 
 class MySharedPreferences(context: Context) {
 
     val PREFS_FILENAME = "prefs"
     val PREF_KEY_MY_EDITTEXT = "myEditText"
     val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0)
+
     /* 파일 이름과 EditText 를 저장할 Key 값을 만들고 prefs 인스턴스 초기화 */
 
     fun setV(key:String, value:String? ){

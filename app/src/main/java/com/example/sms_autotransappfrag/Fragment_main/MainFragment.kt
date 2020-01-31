@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sms_autotransappfrag.MainActivity
+import com.example.sms_autotransappfrag.MainActivity.Companion.INFO_FRAG
 import com.example.sms_autotransappfrag.MainActivity.Companion.LOG_FRAG
 import com.example.sms_autotransappfrag.MainActivity.Companion.MAIN_FRAG
 import com.example.sms_autotransappfrag.MainActivity.Companion.REGIST_FRAG
@@ -59,7 +60,7 @@ class MainFragment : Fragment() {
                     0 -> (activity as MainActivity).changeFragment(REGIST_FRAG)
                     1 -> (activity as MainActivity).changeFragment(LOG_FRAG)
                     2 -> (activity as MainActivity).changeFragment(SEND_FRAG)
-                    3 -> Toast.makeText(context,"버전 : 2020.01.31 ver01",Toast.LENGTH_LONG).show()
+                    3 -> (activity as MainActivity).changeFragment(INFO_FRAG)
 
                 }
             }

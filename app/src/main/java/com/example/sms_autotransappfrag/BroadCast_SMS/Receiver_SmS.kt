@@ -37,6 +37,8 @@ class Receiver_SmS : BroadcastReceiver() {
             Toast.makeText(context,"broad send Sms $sender : $contents",Toast.LENGTH_LONG).show()
             sendToActivity(context,sender.toString(),contents.toString(),receivedDate.toString())
             //temp save the data of sender,contents and time.
+
+
             App.prefs.setV("sender",sender)
             App.prefs.setV("contents",contents)
             App.prefs.setV("receivedDate",receivedDate.toString())

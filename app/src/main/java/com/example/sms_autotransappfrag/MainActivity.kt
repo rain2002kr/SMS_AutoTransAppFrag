@@ -14,6 +14,8 @@ import android.telephony.SmsManager
 import android.util.Log
 import android.util.TimeUtils
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -29,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.roomexample_yena.*
 import com.example.sms_autotransappfrag.Contact_Regist_item.ContactRegistFragment
 import com.example.sms_autotransappfrag.Fragment_main.MainFragment
+import com.example.sms_autotransappfrag.Infomation.InfomationFragment
 import com.example.sms_autotransappfrag.SmS_Send.SendSmSFragment
 import com.example.sms_autotransappfrag.SmS_SentLog.SentLogSmSFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -52,7 +55,38 @@ class MainActivity : AppCompatActivity() {
     private lateinit var contactViewModel : ContactViewModel
     private lateinit var contactLogViewModel : ContactLogViewModel
     private var id: Long? = null
+    private var secondTime:Long = 0L
+    private var firstTime:Long = 0L
 
+
+
+
+    //menuScreen
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main,menu)
+        return true
+    }
+    //menuScreen option
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val curId = item.itemId
+        when(curId){
+            R.id.menu_home -> changeFragment(MAIN_FRAG)
+        }
+
+        return super.onOptionsItemSelected(item)
+
+    }
+
+    override fun onBackPressed() {
+        secondTime = System.currentTimeMillis().toLong()
+        Toast.makeText(this,"어플 종료 버튼이 눌렸습니다.한번 더 누르시면 종료 됩니다.",Toast.LENGTH_LONG).show()
+        if(secondTime - firstTime < 2000){
+            super.onBackPressed()
+            finish()
+        }
+        firstTime  = System.currentTimeMillis().toLong()
+
+    }
 
     //onNewIntent
     override fun onNewIntent(intent: Intent) {
@@ -148,21 +182,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //프래그먼트
+    //프래그먼트 .addToBackStack(null)
     fun changeFragment(frag : Int){
         val ft = supportFragmentManager.beginTransaction()
         when (frag) {
             MAIN_FRAG -> {
-                ft.replace(R.id.fragment, MainFragment()).addToBackStack(null).commit()
+                ft.replace(R.id.fragment, MainFragment()).commit()
             }
             REGIST_FRAG -> {
-                ft.replace(R.id.fragment, ContactRegistFragment()).addToBackStack(null).commit()
+                ft.replace(R.id.fragment, ContactRegistFragment()).commit()
             }
             SEND_FRAG -> {
-                ft.replace(R.id.fragment, SendSmSFragment()).addToBackStack(null).commit()
+                ft.replace(R.id.fragment, SendSmSFragment()).commit()
             }
             LOG_FRAG -> {
-                ft.replace(R.id.fragment, SentLogSmSFragment()).addToBackStack(null).commit()
+                ft.replace(R.id.fragment, SentLogSmSFragment()).commit()
+            }
+            INFO_FRAG -> {
+                ft.replace(R.id.fragment, InfomationFragment()).commit()
             }
 
     }
@@ -334,6 +371,7 @@ class MainActivity : AppCompatActivity() {
         const val REGIST_FRAG = 1
         const val SEND_FRAG = 2
         const val LOG_FRAG = 3
+        const val INFO_FRAG = 4
 
 
     }

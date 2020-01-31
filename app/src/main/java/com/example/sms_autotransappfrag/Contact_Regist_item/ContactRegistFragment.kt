@@ -87,9 +87,6 @@ class ContactRegistFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        home.setOnClickListener({
-            (activity as MainActivity).changeFragment(MAIN_FRAG)
-        })
 
         val inflater = LayoutInflater.from(context)
         inflater.inflate(R.layout.sub_contact_register_view,contact_register,true)

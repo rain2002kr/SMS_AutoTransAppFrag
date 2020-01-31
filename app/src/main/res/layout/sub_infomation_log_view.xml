@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="5dp"
+    android:background="@android:color/holo_blue_bright"
+    android:layout_margin="5dp"
+    tools:context=".Infomation.InfomationFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/txtUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="[공지]서브 메뉴 화면 구성"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="2020-01-31"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical">
+
+            <TextView
+                android:id="@+id/txtDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="12sp"
+                android:text="메인 엑티비티 및 프래그먼트에서 홈버튼추가
+                \n두번째자리
+                "
+                android:textColor="@android:color/background_dark" />
+
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

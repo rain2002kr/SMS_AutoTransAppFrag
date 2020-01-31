@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SMS_AutoTransAppFrag</string>
+    <string name="app_name">문자 자동 전송앱</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

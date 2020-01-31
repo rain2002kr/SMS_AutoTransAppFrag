@@ -15,6 +15,7 @@ import com.example.sms_autotransappfrag.App
 import com.example.sms_autotransappfrag.MainActivity
 
 import com.example.sms_autotransappfrag.R
+import com.example.sms_autotransappfrag.tContact
 import kotlinx.android.synthetic.main.fragment_contact_regist.*
 import kotlinx.android.synthetic.main.fragment_send_sm.*
 
@@ -34,9 +35,7 @@ class SendSmSFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        home2.setOnClickListener({
-            (activity as MainActivity).changeFragment(MainActivity.MAIN_FRAG)
-        })
+
         contactViewModel = ViewModelProviders.of(this).get(ContactViewModel::class.java)
         contactViewModel.getAll().observe(requireActivity(), Observer<List<Contact>>{
 
@@ -49,16 +48,30 @@ class SendSmSFragment : Fragment() {
             Log.d(TAG,"start ")
             contacts?.forEach {
                 Log.d(TAG,"${it.receiveName.toString()}")
-                //txtlogSMS.text = it.receiveName.toString()
 
             }
             val sender = App.prefs.getV("sender")
-            txtlogSMS.text = sender
+            val contents = App.prefs.getV("contents")
+            val receivedDate = App.prefs.getV("receivedDate")
+            println("${sender} ${contents} ${receivedDate}")
+
+        })
+
+        saveBtApp.setOnClickListener({
+
+        })
+        loadBtApp.setOnClickListener({
 
         })
 
 
 
+
+
+    }
+
+    private fun println(data:String){
+        txtlogSMS.setText("${data}\n")
     }
 
 

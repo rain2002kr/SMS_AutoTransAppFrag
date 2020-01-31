@@ -45,9 +45,6 @@ class SentLogSmSFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        home3.setOnClickListener({
-            (activity as MainActivity).changeFragment(MainActivity.MAIN_FRAG)
-        })
 
         // Set contactItemClick & contactItemLongClick lambda
         val adapter = ContactLogAdapter({ contactLog ->
