@@ -4,6 +4,8 @@
 
     <!-- TODO: information flagment -->
     <string name="info">정보 </string>
+    <!-- TODO: sub_contact_register_view -->
+    <string name="sub_contact_register_btinsert">추가 </string>
 
 
 

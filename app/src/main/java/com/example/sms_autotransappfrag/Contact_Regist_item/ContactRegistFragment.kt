@@ -42,33 +42,33 @@ class ContactRegistFragment : Fragment() {
         mutableListOf<Contact>(
             Contact(
                 id,
-                R.drawable.receive_sms!!,
+                R.drawable.robot_2!!,
                 "1588-0800",
                 "국민카드",
                 R.drawable.exchange!!,
-                R.drawable.send_sms!!,
+                R.drawable.robot!!,
                 "010-5687-4135",
                 "와이프",
                 initial
             ),
             Contact(
                 id,
-                R.drawable.receive_sms!!,
+                R.drawable.robot_2!!,
                 "1588-8900",
                 "삼성카드",
                 R.drawable.exchange!!,
-                R.drawable.send_sms!!,
+                R.drawable.robot!!,
                 "010-5687-4135",
                 "와이프",
                 initial
             ),
             Contact(
                 id,
-                R.drawable.receive_sms!!,
+                R.drawable.robot_2!!,
             "650-555-1212",
             "VM Emual",
                 R.drawable.exchange!!,
-                R.drawable.send_sms!!,
+                R.drawable.robot!!,
                 "010-5687-4135",
                 "와이프",
                 initial
@@ -99,8 +99,8 @@ class ContactRegistFragment : Fragment() {
             val tranName = txtSetTransName.text.toString()
 
             val initial = receName[0].toUpperCase()
-            val contact = Contact(id,R.drawable.receive_sms!!,receNumber,receName,
-                R.drawable.exchange!!,R.drawable.send_sms!!,tranNumber,tranName,initial)
+            val contact = Contact(id,R.drawable.robot_2!!,receNumber,receName,
+                R.drawable.exchange!!,R.drawable.robot!!,tranNumber,tranName,initial)
 
             contactViewModel.insert(contact)
 
