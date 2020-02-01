@@ -23,6 +23,11 @@ import kotlinx.android.synthetic.main.fragment_send_sms.*
 class SendSmSFragment : Fragment() {
     val TAG = "SendSmSFragment"
     private lateinit var contactViewModel : ContactViewModel
+    private var sender : String? = null
+    private var contents : String? = null
+    private var receivedDate : String? = null
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,35 +41,30 @@ class SendSmSFragment : Fragment() {
 
         contactViewModel = ViewModelProviders.of(this).get(ContactViewModel::class.java)
         contactViewModel.getAll().observe(requireActivity(), Observer<List<Contact>>{
-
-        })
-
-        checkbt.setOnClickListener({
-            val contacts  = contactViewModel.getAll().value
-            Log.d(TAG,"start ")
-            contacts?.forEach {
-                Log.d(TAG,"${it.receiveName.toString()}")
-
+        val contacts  = contactViewModel.getAll().value
+        Log.d(TAG,"start ")
+        contacts?.forEach {
+            Log.d(TAG,"${it.receiveName.toString()}")
             }
-            val sender = App.prefs.getV("sender")
-            val contents = App.prefs.getV("contents")
-            val receivedDate = App.prefs.getV("receivedDate")
+        })
+        //마지막 문자 확인
+        btCheck.setOnClickListener({
+            sender = App.prefs.getV("sender")
+            contents = App.prefs.getV("contents")
+            receivedDate = App.prefs.getV("receivedDate")
             println("${sender}\n${contents}\n ${receivedDate}\n")
 
         })
-
-
-        btSend.setOnClickListener({
-            val sender = App.prefs.getV("sender")
-            val contents = App.prefs.getV("contents")
-            val receivedDate = App.prefs.getV("receivedDate")
-            val number  = txtSetReceNumber.text.toString()
-            val message =
-            (activity as MainActivity).sendSMS(number , contents.toString())
-
+        //확인한 문자 로드
+        btLoad.setOnClickListener({
+            edSMS.setText(contents.toString())
         })
-
-
+        //문자 전송
+        btSend.setOnClickListener({
+            val number  = txtSetReceNumber.text.toString()
+            val message = edSMS.text.toString()
+            (activity as MainActivity).sendSMS(number , message)
+        })
 
 
 
