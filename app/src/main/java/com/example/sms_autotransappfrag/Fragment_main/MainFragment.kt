@@ -25,16 +25,35 @@ import com.example.sms_autotransappfrag.R
 
 class MainFragment : Fragment() {
     val TAG = "MainFragment"
+
     private val recyclerview_main_screen: RecyclerView by lazy {
         view?.findViewById(R.id.recyclerview_main_screen) as RecyclerView
     }
+  //  val language = resources.configuration.locale.language
+
+    private val image  = listOf<Int>(R.drawable.network,R.drawable.log,R.drawable.sms,R.drawable.info)
+    private val title  = listOf<String>("전송리스트","전송 내역","문자 보내기","정보")
+    private val comment  = listOf<String>("자동 문자 전송 정보를 저장하는 화면입니다."
+                                                    ,"자동 전송된 문자 내역을 확인하는 화면입니다."
+                                                    ,"문자를 전송 할수 있는 화면입니다."
+                                                    ,"버전을 확인 할수 있습니다.")
+
+
     private val list by lazy {
         mutableListOf<MainViewModel>(
+            MainViewModel(image[0], title[0],comment[0]),
+            MainViewModel(image[1], title[1],comment[1]),
+            MainViewModel(image[2], title[2],comment[2]),
+            MainViewModel(image[3], title[3],comment[3]))
+            /*
             MainViewModel(R.drawable.network, "전송 리스트","자동 문자 전송 정보를 저장하는 화면입니다."),
             MainViewModel(R.drawable.log, "전송 내역","자동 전송된 문자 내역을 확인하는 화면입니다."),
             MainViewModel(R.drawable.sms, "문자 보내기","문자를 전송 할수 있는 화면입니다."),
-            MainViewModel(R.drawable.info, "정보","버전을 확인 할수 있습니다.")
-        )
+            MainViewModel(R.drawable.info, "정보","버전을 확인 할수 있습니다."),
+                    MainViewModel(R.drawable.info, title[0],"버전을 확인 할수 있습니다.")
+
+             */
+
     }
 
     private lateinit var mainAdapter : MainViewAdapter

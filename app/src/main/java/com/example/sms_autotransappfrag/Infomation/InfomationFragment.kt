@@ -31,8 +31,7 @@ class InfomationFragment : Fragment() {
     private val list by lazy{
         mutableListOf<InfoViewModel>(
             InfoViewModel("2020-02월","개발 계획",
-                " *[디자인] 앱 아이콘 변경" +
-                        "\n *[디자인+ 기능] 다국어 지원 " +
+                  "\n *[디자인+ 기능] 다국어 지원 " +
                         "\n *[기능] 구글 앱 심사 신청"+
                         "\n *[기능] 문자 보내기 화면 에서 리싸이클러 저장"+
                         "\n *[기능] 문자 보내기 리싸이클러 문자 로드 기능"+
@@ -51,7 +50,9 @@ class InfomationFragment : Fragment() {
             InfoViewModel("2020-02-01","금일 개발 이력",
                 " * [디자인]홈버튼 아이콘 변경 " +
                         "\n * [기능]문자 보내기 " +
-                        "\n * ")
+                        "\n * [디자인] 앱 아이콘 변경 "
+
+            )
         )
 
     }
