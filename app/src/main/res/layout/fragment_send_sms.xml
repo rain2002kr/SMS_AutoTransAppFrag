@@ -22,7 +22,7 @@
             android:layout_margin="2dp"
             android:background="@drawable/item_board"
             android:scaleType="fitCenter"
-            android:src="@drawable/send_sms" />
+            android:src="@drawable/eunseo_girl" />
 
 
         <LinearLayout

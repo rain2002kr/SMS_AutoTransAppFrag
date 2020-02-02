@@ -12,12 +12,36 @@ class MySharedPreferences(context: Context) {
     val PREFS_FILENAME = "prefs"
     val PREF_KEY_MY_EDITTEXT = "myEditText"
     val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0)
-
+    private var  list = mutableSetOf<String>()
+    private var  sender = mutableSetOf<String>()
+    private var  content = mutableSetOf<String>()
+    private var  time = mutableSetOf<String>()
     /* 파일 이름과 EditText 를 저장할 Key 값을 만들고 prefs 인스턴스 초기화 */
 
-    fun setV(key:String, value:String? ){
-        prefs.edit().putString(key,value).apply()
+    fun setSender(key:String , value:String ){
+        sender.add(value)
+        prefs.edit().putStringSet(key,sender)
+
     }
+    fun setContent(key:String , value:String ){
+        content.add(value)
+        prefs.edit().putStringSet(key,content)
+    }
+    fun setTime(key:String , value:String ){
+        time.add(value)
+        prefs.edit().putStringSet(key,time)
+    }
+
+    fun getSender(key:String) :MutableSet<String> {
+        prefs.getStringSet(key, sender)
+        return sender
+    }
+
+
+
+    fun setV(key:String, value:String?){
+        prefs.edit().putString(key,value).apply()
+     }
     fun getV(key:String):String?{
         return prefs.getString(key,"")
     }

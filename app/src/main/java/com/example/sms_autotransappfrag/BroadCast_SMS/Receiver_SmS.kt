@@ -1,6 +1,5 @@
 package com.example.sms_autotransappfrag.BroadCast_SMS
 
-import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -10,8 +9,6 @@ import android.telephony.SmsMessage
 import android.util.Log
 import android.widget.Toast
 import com.example.sms_autotransappfrag.MainActivity
-import android.content.SharedPreferences;
-import android.provider.Settings
 import com.example.sms_autotransappfrag.App
 
 
@@ -37,6 +34,7 @@ class Receiver_SmS : BroadcastReceiver() {
             Toast.makeText(context,"broad send Sms $sender : $contents",Toast.LENGTH_LONG).show()
             sendToActivity(context,sender.toString(),contents.toString(),receivedDate.toString())
             //temp save the data of sender,contents and time.
+
 
 
             App.prefs.setV("sender",sender)

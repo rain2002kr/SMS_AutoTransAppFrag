@@ -42,11 +42,13 @@ class SendSmSFragment : Fragment() {
         contactViewModel = ViewModelProviders.of(this).get(ContactViewModel::class.java)
         contactViewModel.getAll().observe(requireActivity(), Observer<List<Contact>>{
         val contacts  = contactViewModel.getAll().value
+
         Log.d(TAG,"start ")
         contacts?.forEach {
             Log.d(TAG,"${it.receiveName.toString()}")
             }
         })
+
         //마지막 문자 확인
         btCheck.setOnClickListener({
             sender = App.prefs.getV("sender")
