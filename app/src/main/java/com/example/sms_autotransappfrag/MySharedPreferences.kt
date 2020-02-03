@@ -4,42 +4,57 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.roomexample_yena.Contact
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 
-class tContact(val name:String,val sms:String,val time:String)
+data class Dcontact(val name:String,val number:String ,val sms:String,val time:String)
 
 class MySharedPreferences(context: Context) {
+    var gson = GsonBuilder().create()
+    var listType : TypeToken<MutableList<Dcontact>> = object : TypeToken<MutableList<Dcontact>>() {}
+    //var setType : TypeToken<MutableSet<Dcontact>> = object : TypeToken<MutableSet<Dcontact>>() {}
+    //var mapType : TypeToken<MutableMap<String, Dcontact>> = object : TypeToken<MutableMap<String, Dcontact>>() {}
+    private var dcontacts : MutableList<Dcontact> = mutableListOf()
+
 
     val PREFS_FILENAME = "prefs"
     val PREF_KEY_MY_EDITTEXT = "myEditText"
     val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0)
-    private var  list = mutableSetOf<String>()
-    private var  sender = mutableSetOf<String>()
-    private var  content = mutableSetOf<String>()
-    private var  time = mutableSetOf<String>()
     /* 파일 이름과 EditText 를 저장할 Key 값을 만들고 prefs 인스턴스 초기화 */
 
-    fun setSender(key:String , value:String ){
-        sender.add(value)
-        prefs.edit().putStringSet(key,sender)
-
-    }
-    fun setContent(key:String , value:String ){
-        content.add(value)
-        prefs.edit().putStringSet(key,content)
-    }
-    fun setTime(key:String , value:String ){
-        time.add(value)
-        prefs.edit().putStringSet(key,time)
+    fun setContact(key:String, dcontact : Dcontact){
+        dcontacts.add(dcontact)
+        var jsonCon = gson.toJson(dcontacts,listType.type)
+        prefs.edit().putString(key,jsonCon).apply()
     }
 
-    fun getSender(key:String) :MutableSet<String> {
-        prefs.getStringSet(key, sender)
-        return sender
+    fun setContacts(key:String, dcontacts : MutableList<Dcontact>){
+        this.dcontacts = dcontacts
+        var jsonCon = gson.toJson(dcontacts,listType.type)
+        prefs.edit().putString(key,jsonCon).apply()
     }
 
+    fun getContacts(key:String):MutableList<Dcontact>{
+        val gsonCon = prefs.getString(key,"")
+        dcontacts = gson.fromJson(gsonCon,listType.type)
+        return dcontacts
 
+    }
 
-    fun setV(key:String, value:String?){
+    fun getContact(key:String, number: String):Dcontact {
+        val gsonCon = prefs.getString(key, "")
+        dcontacts = gson.fromJson(gsonCon, listType.type)
+        var dcon : Dcontact = Dcontact("","","","")
+        dcontacts.forEach({
+            val numberout = it.number.replace("-", "")
+            if (numberout == number) {
+                dcon =  it
+            }
+        })
+        return dcon
+    }
+
+        fun setV(key:String, value:String?){
         prefs.edit().putString(key,value).apply()
      }
     fun getV(key:String):String?{
@@ -53,7 +68,6 @@ class MySharedPreferences(context: Context) {
      * set(value) 실행 시 value로 값을 대체한 후 저장 */
 
 }
-
 
 class App : Application() {
 

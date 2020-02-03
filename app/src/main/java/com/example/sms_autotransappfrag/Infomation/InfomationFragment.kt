@@ -35,7 +35,6 @@ class InfomationFragment : Fragment() {
                         "\n *[문자보내기] 프로그램 문자, 최근 내역 문자 로드 기능"+
                         "\n *[디자인] 리싸이클러 색상 변경 및 아이콘 변경"+
                         "\n *[기능] Parcelize 로 간편한 접근법"+
-                        "\n *[기능] SharedPreference에서 gson json법 연구"+
                         "\n *[디자인 + 기능] 연락처 등록 수신/송신 다국어"+
                         "\n *[디자인] 홈버튼 아이콘 변경"+
                         "\n *[기능] 구글 앱 심사 신청"+
@@ -43,11 +42,7 @@ class InfomationFragment : Fragment() {
 
             ),
             InfoViewModel("2020-02-02","개발 이력",
-                " * [디자인]- " +
-                        "\n *  " +
-                        "\n *  " +
-                        "\n * "
-
+                " *[기능] SharedPreference에서 gson json으로 list값 저장기능"
             ),
 
             InfoViewModel("2020-02-01","개발 이력",

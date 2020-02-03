@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.roomexample_yena.Contact
 import com.example.roomexample_yena.ContactViewModel
 import com.example.sms_autotransappfrag.App
+import com.example.sms_autotransappfrag.Dcontact
 import com.example.sms_autotransappfrag.MainActivity
 
 import com.example.sms_autotransappfrag.R
@@ -51,15 +52,19 @@ class SendSmSFragment : Fragment() {
 
         //마지막 문자 확인
         btCheck.setOnClickListener({
-            sender = App.prefs.getV("sender")
-            contents = App.prefs.getV("contents")
-            receivedDate = App.prefs.getV("receivedDate")
-            println("${sender}\n${contents}\n ${receivedDate}\n")
+            //sender = App.prefs.getV("sender")
+            //contents = App.prefs.getV("contents")
+            //receivedDate = App.prefs.getV("receivedDate")
+            val contact:Dcontact = Dcontact("이경훈","010-4697-3907","문자","2020년")
+            App.prefs.setContact("contact",contact)
+
+            println("${contact}")
 
         })
         //확인한 문자 로드
         btLoad.setOnClickListener({
-            edSMS.setText(contents.toString())
+            val contactGet = App.prefs.getContact("contact","01046973907")
+            edSMS.setText(contactGet.toString())
         })
         //문자 전송
         btSend.setOnClickListener({
@@ -67,8 +72,6 @@ class SendSmSFragment : Fragment() {
             val message = edSMS.text.toString()
             (activity as MainActivity).sendSMS(number , message)
         })
-
-
 
     }
 
