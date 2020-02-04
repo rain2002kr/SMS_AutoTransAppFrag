@@ -32,6 +32,7 @@ class InfomationFragment : Fragment() {
         mutableListOf<InfoViewModel>(
             InfoViewModel("2020-02월","개발 계획",
                   " *[문자보내기] 보낸 문자 리싸이클러 저장"+
+                        "\n *[파이어베이스] 파이어베이스 저장 및 로드"+
                         "\n *[문자보내기] 프로그램 문자, 최근 내역 문자 로드 기능"+
                         "\n *[디자인] 리싸이클러 색상 변경 및 아이콘 변경"+
                         "\n *[기능] Parcelize 로 간편한 접근법"+

@@ -7,7 +7,7 @@ import com.example.roomexample_yena.Contact
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 
-data class Dcontact(val name:String,val number:String ,val sms:String,val time:String)
+data class Dcontact(val name:String,val number:String ,val sms:String="",val time:String="")
 
 class MySharedPreferences(context: Context) {
     var gson = GsonBuilder().create()
@@ -22,6 +22,12 @@ class MySharedPreferences(context: Context) {
     val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0)
     /* 파일 이름과 EditText 를 저장할 Key 값을 만들고 prefs 인스턴스 초기화 */
 
+    fun setContact(key:String, name: String, number: String){
+        dcontacts.add(Dcontact(name = name, number = number))
+        var jsonCon = gson.toJson(dcontacts,listType.type)
+        prefs.edit().putString(key,jsonCon).apply()
+    }
+
     fun setContact(key:String, dcontact : Dcontact){
         dcontacts.add(dcontact)
         var jsonCon = gson.toJson(dcontacts,listType.type)
@@ -34,7 +40,7 @@ class MySharedPreferences(context: Context) {
         prefs.edit().putString(key,jsonCon).apply()
     }
 
-    fun getContacts(key:String):MutableList<Dcontact>{
+    fun getContact(key:String):MutableList<Dcontact>{
         val gsonCon = prefs.getString(key,"")
         dcontacts = gson.fromJson(gsonCon,listType.type)
         return dcontacts
@@ -54,7 +60,7 @@ class MySharedPreferences(context: Context) {
         return dcon
     }
 
-        fun setV(key:String, value:String?){
+    fun setV(key:String, value:String?){
         prefs.edit().putString(key,value).apply()
      }
     fun getV(key:String):String?{

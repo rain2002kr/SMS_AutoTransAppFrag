@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".App"
+
         >
         <receiver
             android:name=".BroadCast_SMS.Receiver_SmS"

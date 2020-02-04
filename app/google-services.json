@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "910998998842",
+    "firebase_url": "https://smsautotransappfrag.firebaseio.com",
+    "project_id": "smsautotransappfrag",
+    "storage_bucket": "smsautotransappfrag.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910998998842:android:dba2607a17122953404a03",
+        "android_client_info": {
+          "package_name": "com.example.sms_autotransappfrag"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "910998998842-bm3cpqptiupoueokubibopdgpbasjlc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAsxTv__qs1gj__IxkuPGFXa6VDC1E7mw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "910998998842-bm3cpqptiupoueokubibopdgpbasjlc6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

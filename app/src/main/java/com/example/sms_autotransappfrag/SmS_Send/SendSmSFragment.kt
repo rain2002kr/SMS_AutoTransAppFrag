@@ -16,6 +16,8 @@ import com.example.sms_autotransappfrag.Dcontact
 import com.example.sms_autotransappfrag.MainActivity
 
 import com.example.sms_autotransappfrag.R
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_send_sms.*
 
 /**
@@ -27,6 +29,8 @@ class SendSmSFragment : Fragment() {
     private var sender : String? = null
     private var contents : String? = null
     private var receivedDate : String? = null
+    private lateinit var database: FirebaseDatabase
+    private lateinit var myRef: DatabaseReference
 
 
     override fun onCreateView(
@@ -39,6 +43,16 @@ class SendSmSFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        // [START initialize_database_ref]
+
+        //private lateinit var database: FirebaseDatabase
+        //private lateinit var myRef: DatabaseReference
+        database = FirebaseDatabase.getInstance()
+        myRef = database.getReference()
+
+
+
+
 
         contactViewModel = ViewModelProviders.of(this).get(ContactViewModel::class.java)
         contactViewModel.getAll().observe(requireActivity(), Observer<List<Contact>>{
@@ -59,6 +73,13 @@ class SendSmSFragment : Fragment() {
             App.prefs.setContact("contact",contact)
 
             println("${contact}")
+
+            //myRef.push().setValue("Data")
+            myRef.child("Data").push().setValue("hello , this is first time")
+            myRef.child("Data").push().setValue("hello2 , this is first time2")
+
+
+
 
         })
         //확인한 문자 로드
