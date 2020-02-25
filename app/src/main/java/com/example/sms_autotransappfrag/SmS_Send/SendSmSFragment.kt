@@ -11,11 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.roomexample_yena.Contact
 import com.example.roomexample_yena.ContactViewModel
-import com.example.sms_autotransappfrag.App
-import com.example.sms_autotransappfrag.Dcontact
-import com.example.sms_autotransappfrag.MainActivity
+import com.example.sms_autotransappfrag.*
 
-import com.example.sms_autotransappfrag.R
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_send_sms.*
@@ -45,13 +42,8 @@ class SendSmSFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         // [START initialize_database_ref]
 
-        //private lateinit var database: FirebaseDatabase
-        //private lateinit var myRef: DatabaseReference
         database = FirebaseDatabase.getInstance()
         myRef = database.getReference()
-
-
-
 
 
         contactViewModel = ViewModelProviders.of(this).get(ContactViewModel::class.java)
@@ -63,29 +55,29 @@ class SendSmSFragment : Fragment() {
             Log.d(TAG,"${it.receiveName.toString()}")
             }
         })
+        //연락처 등록
+        btAdd.setOnClickListener({
+            var number = txtSetReceNumber.text.toString()
+            var name = txtSetReceName.text.toString()
+            App.prefs.putTellist(TelList(name,number))
+
+        })
 
         //마지막 문자 확인
         btCheck.setOnClickListener({
-            //sender = App.prefs.getV("sender")
-            //contents = App.prefs.getV("contents")
-            //receivedDate = App.prefs.getV("receivedDate")
             val contact:Dcontact = Dcontact("이경훈","010-4697-3907","문자","2020년")
-            App.prefs.setContact("contact",contact)
-
             println("${contact}")
 
-            //myRef.push().setValue("Data")
             myRef.child("Data").push().setValue("hello , this is first time")
-            myRef.child("Data").push().setValue("hello2 , this is first time2")
-
-
-
+            //myRef.child("Data").push().setValue("hello2 , this is first time2")
+            var list = App.prefs.getTellist()
+            txtlogSMS.setText(list.toString())
 
         })
         //확인한 문자 로드
         btLoad.setOnClickListener({
-            val contactGet = App.prefs.getContact("contact","01046973907")
-            edSMS.setText(contactGet.toString())
+            val contactGet = App.prefs.getDcontact()
+            txtlogSMS.setText(contactGet.toString())
         })
         //문자 전송
         btSend.setOnClickListener({

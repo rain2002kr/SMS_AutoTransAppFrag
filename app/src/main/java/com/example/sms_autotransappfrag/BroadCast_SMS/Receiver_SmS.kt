@@ -10,13 +10,12 @@ import android.util.Log
 import android.widget.Toast
 import com.example.sms_autotransappfrag.MainActivity
 import com.example.sms_autotransappfrag.App
+import java.text.SimpleDateFormat
 
 
 import java.util.*
 
 class Receiver_SmS : BroadcastReceiver() {
-    private val SimpleDateFormat= "yyyy-MM-dd HH:mm"
-
     private val TAG = "Receiver_SmS"
 
     override fun onReceive(context: Context, intent: Intent) {
@@ -27,7 +26,8 @@ class Receiver_SmS : BroadcastReceiver() {
         if (messages!!.size > 0) {
             val sender : String? = messages[0]?.originatingAddress
             val contents : String? = messages[0]?.messageBody.toString()
-            val receivedDate = Date(messages[0]!!.timestampMillis)
+            val receivedDate = SimpleDateFormat("yy년 MM월 dd일 E요일 HH:mm:ss").format(Date(messages[0]!!.timestampMillis))
+
             Log.d(this.javaClass.name, "sender: $sender")
             Log.d(this.javaClass.name, "contents: $contents")
             Log.d(this.javaClass.name, "received date: $receivedDate")
@@ -35,11 +35,11 @@ class Receiver_SmS : BroadcastReceiver() {
             sendToActivity(context,sender.toString(),contents.toString(),receivedDate.toString())
             //temp save the data of sender,contents and time.
 
-
-
             App.prefs.setV("sender",sender)
             App.prefs.setV("contents",contents)
             App.prefs.setV("receivedDate",receivedDate.toString())
+
+            App.prefs.putDcontact(sender.toString(),contents.toString(),receivedDate.toString())
 
         }
     }

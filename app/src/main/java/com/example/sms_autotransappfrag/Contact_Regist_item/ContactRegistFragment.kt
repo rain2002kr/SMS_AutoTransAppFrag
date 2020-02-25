@@ -54,6 +54,40 @@ class ContactRegistFragment : Fragment() {
             Contact(
                 id,
                 R.drawable.robot_2!!,
+                "1899-0800",
+                "국민카드",
+                R.drawable.exchange!!,
+                R.drawable.robot!!,
+                "010-5687-4135",
+                "와이프",
+                initial
+            ),
+            Contact(
+                id,
+                R.drawable.robot_2!!,
+                "1588-1688",
+                "국민카드",
+                R.drawable.exchange!!,
+                R.drawable.robot!!,
+                "010-5687-4135",
+                "와이프",
+                initial
+            ),
+            Contact(
+                id,
+                R.drawable.robot_2!!,
+                "1577-6200",
+                "현대카드",
+                R.drawable.exchange!!,
+                R.drawable.robot!!,
+                "010-5687-4135",
+                "와이프",
+                initial
+            ),
+
+            Contact(
+                id,
+                R.drawable.robot_2!!,
                 "1588-8900",
                 "삼성카드",
                 R.drawable.exchange!!,

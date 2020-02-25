@@ -8,30 +8,87 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 
 data class Dcontact(val name:String,val number:String ,val sms:String="",val time:String="")
+data class TelList(val name:String, val number:String)
 
 class MySharedPreferences(context: Context) {
     var gson = GsonBuilder().create()
     var listType : TypeToken<MutableList<Dcontact>> = object : TypeToken<MutableList<Dcontact>>() {}
-    //var setType : TypeToken<MutableSet<Dcontact>> = object : TypeToken<MutableSet<Dcontact>>() {}
-    //var mapType : TypeToken<MutableMap<String, Dcontact>> = object : TypeToken<MutableMap<String, Dcontact>>() {}
-    private var dcontacts : MutableList<Dcontact> = mutableListOf()
+    var listType2 : TypeToken<MutableList<TelList>> = object : TypeToken<MutableList<TelList>>() {}
+    //var js :String = ""
+    //var gs = mutableListOf<Dcontact>()
 
-
+    companion object {
+        private var dcontacts : MutableList<Dcontact> = mutableListOf()
+        private var tellists : MutableList<TelList> = mutableListOf()
+    }
     val PREFS_FILENAME = "prefs"
     val PREF_KEY_MY_EDITTEXT = "myEditText"
     val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0)
-    /* 파일 이름과 EditText 를 저장할 Key 값을 만들고 prefs 인스턴스 초기화 */
 
-    fun setContact(key:String, name: String, number: String){
-        dcontacts.add(Dcontact(name = name, number = number))
-        var jsonCon = gson.toJson(dcontacts,listType.type)
+    /* 파일 이름과 EditText 를 저장할 Key 값을 만들고 prefs 인스턴스 초기화 */
+//Put Tellists overloading
+    fun putTellist(tellist : TelList){
+        //get js from tellist
+        val key = "tellists"
+        val gsonCon = prefs.getString(key,"")
+        if(null != gson.fromJson(gsonCon,listType2.type)){tellists = gson.fromJson(gsonCon,listType2.type)}
+        tellists.add(tellist)
+        var jsonCon = gson.toJson(tellists,listType2.type)
         prefs.edit().putString(key,jsonCon).apply()
     }
+    fun getTellist():MutableList<TelList>{
+        val key = "tellists"
+        val gsonCon = prefs.getString(key,"")
+        if(null != gson.fromJson(gsonCon,listType2.type)){tellists = gson.fromJson(gsonCon,listType2.type)}
+        return tellists
+    }
 
-    fun setContact(key:String, dcontact : Dcontact){
-        dcontacts.add(dcontact)
+//put SMS Dcontacts ovloading
+    fun putDcontact(number: String,sms: String,time: String){
+
+        var message = Dcontact("none",number,sms,time)
+        val keytel = "tellists"
+        val gsonConT = prefs.getString(keytel,"")
+        if(null != gson.fromJson(gsonConT,listType2.type)){tellists = gson.fromJson(gsonConT,listType2.type)}
+
+        //Check tellist
+        tellists.forEach{
+            var tempNumber = it.number.replace("-","")
+            if(number == tempNumber){
+                message = Dcontact(it.name,it.number,sms,time)
+            }else{
+                message = Dcontact("none",number,sms,time)
+            }
+        }
+        val key = "receSms"
+        val gsonCon = prefs.getString(key,"")
+        if(null != gson.fromJson(gsonCon,listType.type)){dcontacts = gson.fromJson(gsonCon,listType.type)}
+        dcontacts.add(message)
         var jsonCon = gson.toJson(dcontacts,listType.type)
         prefs.edit().putString(key,jsonCon).apply()
+
+    }
+    fun getDcontact():MutableList<Dcontact>{
+        val key = "receSms"
+        val gsonCon = prefs.getString(key,"")
+        if(null != gson.fromJson(gsonCon,listType.type)){dcontacts = gson.fromJson(gsonCon,listType.type)}
+        return dcontacts
+    }
+
+
+/*
+    fun setContact(name: String, number: String){
+        dcontacts.add(Dcontact(name = name, number = number))
+        var jsonCon = gson.toJson(dcontacts,listType.type)
+        var key = dcontacts.lastIndex + 1
+        prefs.edit().putString(key.toString(),jsonCon).apply()
+    }
+
+    fun setContact(dcontact : Dcontact){
+        dcontacts.add(dcontact)
+        var jsonCon = gson.toJson(dcontacts,listType.type)
+        var key = dcontacts.lastIndex + 1
+        prefs.edit().putString(key.toString(),jsonCon).apply()
     }
 
     fun setContacts(key:String, dcontacts : MutableList<Dcontact>){
@@ -39,6 +96,9 @@ class MySharedPreferences(context: Context) {
         var jsonCon = gson.toJson(dcontacts,listType.type)
         prefs.edit().putString(key,jsonCon).apply()
     }
+
+
+//end of SetContact overloading
 
     fun getContact(key:String):MutableList<Dcontact>{
         val gsonCon = prefs.getString(key,"")
@@ -59,6 +119,7 @@ class MySharedPreferences(context: Context) {
         })
         return dcon
     }
+*/
 
     fun setV(key:String, value:String?){
         prefs.edit().putString(key,value).apply()

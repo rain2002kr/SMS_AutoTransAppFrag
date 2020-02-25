@@ -32,6 +32,8 @@ class InfomationFragment : Fragment() {
         mutableListOf<InfoViewModel>(
             InfoViewModel("2020-02월","개발 계획",
                   " *[문자보내기] 보낸 문자 리싸이클러 저장"+
+                        "\n *[기능] 문자보내기 화면 : [받은내역 리스트뷰 추가(전체뷰,서치뷰,전송체크,로드,삭제)] "+
+                        "\n *[디자인+기능] 전송내역 부분화면 추가[받은내역(전체뷰,서치뷰,전송체크),전송내역] "+
                         "\n *[파이어베이스] 파이어베이스 저장 및 로드"+
                         "\n *[문자보내기] 프로그램 문자, 최근 내역 문자 로드 기능"+
                         "\n *[디자인] 리싸이클러 색상 변경 및 아이콘 변경"+
@@ -42,6 +44,14 @@ class InfomationFragment : Fragment() {
                         "\n *[문서] 문자자동전송 앱 설명 및 메뉴얼 제작"
 
             ),
+            InfoViewModel("2020-02-26","개발 이력",
+                " *[기능] SMS 받을 때 SimpleDateFormat(yyyy-MM-dd HH:mm:ss).format 타입변경 "
+
+            ),
+            InfoViewModel("2020-02-25","개발 이력",
+                " *[기능] 보낸문자 다 받아오기"
+            ),
+
             InfoViewModel("2020-02-02","개발 이력",
                 " *[기능] SharedPreference에서 gson json으로 list값 저장기능"
             ),
